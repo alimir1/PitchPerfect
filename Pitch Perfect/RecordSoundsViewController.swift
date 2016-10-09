@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  RecordSoundsViewController.swift
 //  Pitch Perfect
 //
 //  Created by Abidi on 10/8/16.
@@ -19,16 +19,11 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
         stopButton.isEnabled = false
     }
     
     @IBAction func recordAudio(_ sender: AnyObject) {
-        stopButton.isEnabled = true
-        recordButton.isEnabled = false
-        recordingLabel.text = "Recording..."
+        setUIElementsState(recordButtonEnabled: false, stopButtonEnabled: true, recordingLabel: "Recording...")
 
         let dirPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
         let filePath = NSURL.fileURL(withPathComponents: [dirPath, "recordedVoice.wav"])
@@ -43,11 +38,15 @@ class RecordSoundsViewController: UIViewController, AVAudioRecorderDelegate {
     }
     
     @IBAction func stopRecording(_ sender: AnyObject) {
-        recordButton.isEnabled = true
-        stopButton.isEnabled = false
-        recordingLabel.text = "Tap to Record"
+        setUIElementsState(recordButtonEnabled: true, stopButtonEnabled: false, recordingLabel: "Tap to Record")
         audioRecorder.stop()
         try! AVAudioSession.sharedInstance().setActive(false)
+    }
+    
+    func setUIElementsState(recordButtonEnabled recordButtonIsEnabled: Bool, stopButtonEnabled: Bool, recordingLabel: String) {
+        self.recordButton.isEnabled = recordButtonIsEnabled
+        self.stopButton.isEnabled = stopButtonEnabled
+        self.recordingLabel.text = recordingLabel
     }
     
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {

@@ -33,16 +33,16 @@ class PlaySoundsViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         configureUI(playState: .NotPlaying)
     }
-    
     @IBAction func playChangedAudio(_ sender: AnyObject) {
         configureUI(playState: .Playing)
         switch (sounds(rawValue: sender.tag)!) {
         case .chipMunk:
-            playSound(pitch: -1000)
-        case .darthVader:
             playSound(pitch: 1000)
+        case .darthVader:
+            playSound(pitch: -1000)
         case .echo:
             playSound(echo: true)
         case .fast:
