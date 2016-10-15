@@ -9,7 +9,7 @@ Github: https://github.com/alimir1/PitchPerfect
 
 Build Information:
 * Version: 1.0
-* Xcode Version: 8.9
+* Xcode Version: 8.0
 * iOS: 10.0
 * Swift: 3.0
 
